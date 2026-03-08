@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasta - Wonderfull Cafe</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&family=Sanchez:wght@400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="detail-nav">
+        <a href="index.html" class="back-btn">← Back to Menu</a>
+    </nav>
+
+    <section class="detail-section">
+        <div class="detail-container">
+            <div class="detail-image">
+                <img src="images/creamy pasta.png" alt="Pasta">
+            </div>
+            <div class="detail-info">
+                <h1>Creamy Alfredo Pasta</h1>
+                <p class="detail-description">
+                    Rich and creamy alfredo sauce tossed with fettuccine pasta, parmesan cheese, and fresh herbs.
+                </p>
+                <div class="detail-price">
+                    <span class="price">$10</span>
+                </div>
+                <div class="detail-options">
+                    <h3>Customize Your Pasta</h3>
+                    <label>
+                        <input type="checkbox" id="grilledChicken" onchange="updatePrice()">
+                        Add Grilled Chicken (+$4)
+                    </label>
+                    <label>
+                        <input type="checkbox" id="mushrooms" onchange="updatePrice()">
+                        Add Mushrooms (+$2)
+                    </label>
+                </div>
+                <div class="quantity-selector">
+                    <button onclick="decreaseQty()">-</button>
+                    <span id="quantity">1</span>
+                    <button onclick="increaseQty()">+</button>
+                </div>
+                <div class="total-price">
+                    Total: $<span id="totalPrice">10</span>
+                </div>
+                <button class="btn add-to-order" onclick="addPastaToOrder()">Add to Order</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Wonderfull Cafe | All Rights Reserved</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let basePrice = 10;
+        let quantity = 1;
+
+        function updatePrice() {
+            let total = basePrice;
+            if (document.getElementById('grilledChicken').checked) total += 4;
+            if (document.getElementById('mushrooms').checked) total += 2;
+            document.getElementById('totalPrice').textContent = total * quantity;
+        }
+
+        function increaseQty() {
+            quantity++;
+            document.getElementById('quantity').textContent = quantity;
+            updatePrice();
+        }
+
+        function decreaseQty() {
+            if (quantity > 1) {
+                quantity--;
+                document.getElementById('quantity').textContent = quantity;
+                updatePrice();
+            }
+        }
+
+        function addPastaToOrder() {
+            let total = basePrice;
+            let itemName = 'Creamy Alfredo Pasta';
+            let customizations = [];
+
+            if (document.getElementById('grilledChicken').checked) {
+                total += 4;
+                customizations.push('Grilled Chicken');
+            }
+            if (document.getElementById('mushrooms').checked) {
+                total += 2;
+                customizations.push('Mushrooms');
+            }
+
+            if (customizations.length > 0) {
+                itemName = 'Creamy Alfredo Pasta (' + customizations.join(', ') + ')';
+            }
+
+            for (let i = 0; i < quantity; i++) {
+                addToOrder(itemName, total);
+            }
+
+            alert('Pasta added to order!');
+        }
+    </script>
+</body>
+
+</html>

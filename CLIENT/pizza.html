@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza - Wonderfull Cafe</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&family=Sanchez:wght@400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="detail-nav">
+        <a href="index.html" class="back-btn">← Back to Menu</a>
+    </nav>
+
+    <section class="detail-section">
+        <div class="detail-container">
+            <div class="detail-image">
+                <img src="images/pizza margherita.png" alt="Pizza">
+            </div>
+            <div class="detail-info">
+                <h1>Margherita Pizza</h1>
+                <p class="detail-description">
+                    Classic Italian pizza with fresh mozzarella, tomatoes, and basil on our hand-tossed crispy crust.
+                </p>
+                <div class="detail-price">
+                    <span class="price">$12</span>
+                </div>
+                <div class="detail-options">
+                    <h3>Customize Your Pizza</h3>
+                    <label>
+                        <input type="checkbox" id="extraCheese" onchange="updatePrice()">
+                        Extra Cheese (+$2)
+                    </label>
+                    <label>
+                        <input type="checkbox" id="pepperoni" onchange="updatePrice()">
+                        Add Pepperoni (+$3)
+                    </label>
+                </div>
+                <div class="quantity-selector">
+                    <button onclick="decreaseQty()">-</button>
+                    <span id="quantity">1</span>
+                    <button onclick="increaseQty()">+</button>
+                </div>
+                <div class="total-price">
+                    Total: $<span id="totalPrice">12</span>
+                </div>
+                <button class="btn add-to-order" onclick="addPizzaToOrder()">Add to Order</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Wonderfull Cafe | All Rights Reserved</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let basePrice = 12;
+        let quantity = 1;
+
+        function updatePrice() {
+            let total = basePrice;
+            if (document.getElementById('extraCheese').checked) total += 2;
+            if (document.getElementById('pepperoni').checked) total += 3;
+            document.getElementById('totalPrice').textContent = total * quantity;
+        }
+
+        function increaseQty() {
+            quantity++;
+            document.getElementById('quantity').textContent = quantity;
+            updatePrice();
+        }
+
+        function decreaseQty() {
+            if (quantity > 1) {
+                quantity--;
+                document.getElementById('quantity').textContent = quantity;
+                updatePrice();
+            }
+        }
+
+        function addPizzaToOrder() {
+            let total = basePrice;
+            let itemName = 'Margherita Pizza';
+            let customizations = [];
+
+            if (document.getElementById('extraCheese').checked) {
+                total += 2;
+                customizations.push('Extra Cheese');
+            }
+            if (document.getElementById('pepperoni').checked) {
+                total += 3;
+                customizations.push('Pepperoni');
+            }
+
+            if (customizations.length > 0) {
+                itemName = 'Margherita Pizza (' + customizations.join(', ') + ')';
+            }
+
+            for (let i = 0; i < quantity; i++) {
+                addToOrder(itemName, total);
+            }
+
+            alert('Pizza added to order!');
+        }
+    </script>
+</body>
+
+</html>

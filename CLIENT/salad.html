@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salad - Wonderfull Cafe</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&family=Sanchez:wght@400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="detail-nav">
+        <a href="index.html" class="back-btn">← Back to Menu</a>
+    </nav>
+
+    <section class="detail-section">
+        <div class="detail-container">
+            <div class="detail-image">
+                <img src="images/fresh salad.png" alt="Salad">
+            </div>
+            <div class="detail-info">
+                <h1>Caesar Salad</h1>
+                <p class="detail-description">
+                    Fresh romaine lettuce with caesar dressing, parmesan cheese, croutons, and grilled chicken breast.
+                </p>
+                <div class="detail-price">
+                    <span class="price">$7</span>
+                </div>
+                <div class="detail-options">
+                    <h3>Customize Your Salad</h3>
+                    <label>
+                        <input type="checkbox" id="extraChicken" onchange="updatePrice()">
+                        Extra Chicken (+$4)
+                    </label>
+                    <label>
+                        <input type="checkbox" id="bacon" onchange="updatePrice()">
+                        Add Bacon (+$3)
+                    </label>
+                </div>
+                <div class="quantity-selector">
+                    <button onclick="decreaseQty()">-</button>
+                    <span id="quantity">1</span>
+                    <button onclick="increaseQty()">+</button>
+                </div>
+                <div class="total-price">
+                    Total: $<span id="totalPrice">7</span>
+                </div>
+                <button class="btn add-to-order" onclick="addSaladToOrder()">Add to Order</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Wonderfull Cafe | All Rights Reserved</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let basePrice = 7;
+        let quantity = 1;
+
+        function updatePrice() {
+            let total = basePrice;
+            if (document.getElementById('extraChicken').checked) total += 4;
+            if (document.getElementById('bacon').checked) total += 3;
+            document.getElementById('totalPrice').textContent = total * quantity;
+        }
+
+        function increaseQty() {
+            quantity++;
+            document.getElementById('quantity').textContent = quantity;
+            updatePrice();
+        }
+
+        function decreaseQty() {
+            if (quantity > 1) {
+                quantity--;
+                document.getElementById('quantity').textContent = quantity;
+                updatePrice();
+            }
+        }
+
+        function addSaladToOrder() {
+            let total = basePrice;
+            let itemName = 'Caesar Salad';
+            let customizations = [];
+
+            if (document.getElementById('extraChicken').checked) {
+                total += 4;
+                customizations.push('Extra Chicken');
+            }
+            if (document.getElementById('bacon').checked) {
+                total += 3;
+                customizations.push('Bacon');
+            }
+
+            if (customizations.length > 0) {
+                itemName = 'Caesar Salad (' + customizations.join(', ') + ')';
+            }
+
+            for (let i = 0; i < quantity; i++) {
+                addToOrder(itemName, total);
+            }
+
+            alert('Salad added to order!');
+        }
+    </script>
+</body>
+
+</html>

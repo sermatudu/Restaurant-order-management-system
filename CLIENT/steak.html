@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steak - Wonderfull Cafe</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&family=Sanchez:wght@400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="detail-nav">
+        <a href="index.html" class="back-btn">← Back to Menu</a>
+    </nav>
+
+    <section class="detail-section">
+        <div class="detail-container">
+            <div class="detail-image">
+                <img src="images/grilled steak.png" alt="Steak">
+            </div>
+            <div class="detail-info">
+                <h1>Grilled Ribeye Steak</h1>
+                <p class="detail-description">
+                    Premium ribeye steak grilled to perfection, served with roasted vegetables and your choice of sauce.
+                </p>
+                <div class="detail-price">
+                    <span class="price">$18</span>
+                </div>
+                <div class="detail-options">
+                    <h3>Customize Your Steak</h3>
+                    <label>
+                        <input type="checkbox" id="mushrooms" onchange="updatePrice()">
+                        Add Mushrooms (+$3)
+                    </label>
+                    <label>
+                        <input type="checkbox" id="extraSauce" onchange="updatePrice()">
+                        Extra Sauce (+$2)
+                    </label>
+                </div>
+                <div class="quantity-selector">
+                    <button onclick="decreaseQty()">-</button>
+                    <span id="quantity">1</span>
+                    <button onclick="increaseQty()">+</button>
+                </div>
+                <div class="total-price">
+                    Total: $<span id="totalPrice">18</span>
+                </div>
+                <button class="btn add-to-order" onclick="addSteakToOrder()">Add to Order</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Wonderfull Cafe | All Rights Reserved</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let basePrice = 18;
+        let quantity = 1;
+
+        function updatePrice() {
+            let total = basePrice;
+            if (document.getElementById('mushrooms').checked) total += 3;
+            if (document.getElementById('extraSauce').checked) total += 2;
+            document.getElementById('totalPrice').textContent = total * quantity;
+        }
+
+        function increaseQty() {
+            quantity++;
+            document.getElementById('quantity').textContent = quantity;
+            updatePrice();
+        }
+
+        function decreaseQty() {
+            if (quantity > 1) {
+                quantity--;
+                document.getElementById('quantity').textContent = quantity;
+                updatePrice();
+            }
+        }
+
+        function addSteakToOrder() {
+            let total = basePrice;
+            let itemName = 'Grilled Ribeye Steak';
+            let customizations = [];
+
+            if (document.getElementById('mushrooms').checked) {
+                total += 3;
+                customizations.push('Mushrooms');
+            }
+            if (document.getElementById('extraSauce').checked) {
+                total += 2;
+                customizations.push('Extra Sauce');
+            }
+
+            if (customizations.length > 0) {
+                itemName = 'Grilled Ribeye Steak (' + customizations.join(', ') + ')';
+            }
+
+            for (let i = 0; i < quantity; i++) {
+                addToOrder(itemName, total);
+            }
+
+            alert('Steak added to order!');
+        }
+    </script>
+</body>
+
+</html>

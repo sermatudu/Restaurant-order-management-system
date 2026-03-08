@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wonderfull Cafe</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">
+            <i class="fas fa-utensils"></i>
+            <span>Wonderfull Cafe</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#order" class="cart-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a></li>
+        </ul>
+        <div class="nav-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Delicious Food <br>Delivered to You</h1>
+            <p>Experience fine dining like never before. Fresh ingredients, authentic recipes, and unforgettable
+                flavors.</p>
+            <div class="hero-buttons">
+                <a href="#menu" class="btn btn-primary">Order Now</a>
+                <a href="#menu" class="btn btn-secondary">View Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="popular-section">
+        <h2 class="section-title">Popular Items</h2>
+        <p class="section-subtitle">Our most loved dishes by customers</p>
+        <div class="popular-grid">
+            <div class="food-card" onclick="window.location.href='pizza.html'">
+                <div class="food-card-image">
+                    <img src="images/pizza margherita.png" alt="Pizza">
+                    <span class="food-badge">Popular</span>
+                </div>
+                <div class="food-card-content">
+                    <h3>Pizza Margherita</h3>
+                    <p class="food-description">Fresh tomatoes, mozzarella, basil</p>
+                    <div class="food-card-footer">
+                        <span class="food-price">$12</span>
+                        <button class="btn-add" onclick="event.stopPropagation(); window.location.href='pizza.html'">
+                            <i class="fas fa-plus"></i> View
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="food-card" onclick="window.location.href='burger.html'">
+                <div class="food-card-image">
+                    <img src="images/classic burger.png" alt="Burger">
+                    <span class="food-badge">Best Seller</span>
+                </div>
+                <div class="food-card-content">
+                    <h3>Classic Burger</h3>
+                    <p class="food-description">Juicy beef patty with fresh veggies</p>
+                    <div class="food-card-footer">
+                        <span class="food-price">$8</span>
+                        <button class="btn-add" onclick="event.stopPropagation(); window.location.href='burger.html'">
+                            <i class="fas fa-plus"></i> View
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="food-card" onclick="window.location.href='pasta.html'">
+                <div class="food-card-image">
+                    <img src="images/creamy pasta.png" alt="Pasta">
+                    <span class="food-badge">Popular</span>
+                </div>
+                <div class="food-card-content">
+                    <h3>Creamy Pasta</h3>
+                    <p class="food-description">Rich creamy sauce with parmesan</p>
+                    <div class="food-card-footer">
+                        <span class="food-price">$10</span>
+                        <button class="btn-add" onclick="event.stopPropagation(); window.location.href='pasta.html'">
+                            <i class="fas fa-plus"></i> View
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="food-card" onclick="window.location.href='sushi.html'">
+                <div class="food-card-image">
+                    <img src="images/sushi platter.png" alt="Sushi">
+                    <span class="food-badge">Premium</span>
+                </div>
+                <div class="food-card-content">
+                    <h3>Sushi Platter</h3>
+                    <p class="food-description">Fresh salmon and tuna selection</p>
+                    <div class="food-card-footer">
+                        <span class="food-price">$15</span>
+                        <button class="btn-add" onclick="event.stopPropagation(); window.location.href='sushi.html'">
+                            <i class="fas fa-plus"></i> View
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="about-container">
+            <div class="about-image">
+                <img src="images/restaurent interior.png" alt="Restaurant Interior">
+            </div>
+            <div class="about-content">
+                <h2>About Us</h2>
+                <p>At Wonderfull Cafe, we blend tradition with modern taste. Our passionate chefs use only the freshest
+                    ingredients to create memorable dining experiences for our guests.</p>
+                <p>Whether you're craving authentic local flavors or international cuisine, we have something for
+                    everyone. Come and taste the difference!</p>
+                <div class="about-features">
+                    <div class="feature">
+                        <i class="fas fa-clock"></i>
+                        <span>Fast Delivery</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-leaf"></i>
+                        <span>Fresh Ingredients</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-heart"></i>
+                        <span>Made with Love</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="menu-section">
+        <h2 class="section-title">Our Menu</h2>
+        <p class="section-subtitle">Explore our delicious collection of dishes</p>
+        <div class="menu-tabs">
+            <button class="menu-tab active" data-category="all">All</button>
+            <button class="menu-tab" data-category="burgers">Burgers</button>
+            <button class="menu-tab" data-category="pizza">Pizza</button>
+            <button class="menu-tab" data-category="pasta">Pasta</button>
+            <button class="menu-tab" data-category="rice">Rice & Biriyani</button>
+            <button class="menu-tab" data-category="sushi">Sushi</button>
+        </div>
+        <div class="menu-container">
+            <div class="food-card" data-category="burgers" onclick="window.location.href='burger.html'">
+                <div class="food-card-image">
+                    <img src="images/classic burger.png" alt="Burger">
+                </div>
+                <div class="food-card-content">
+                    <h3>Classic Burger</h3>
+                    <p class="food-description">Juicy beef patty with fresh vegetables</p>
+                    <div class="food-card-footer">
+                        <span class="food-price">$8</span>
+                        <button class="btn-add" onclick="event.stopPropagation(); window.location.href='burger.html'">
+                            <i class="fas fa-plus"></i> View
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="food-card" data-category="burgers" onclick="window.location.href='sandwich.html'">
+                <div class="food-card-image">
+                    <img src="images/grilled sandwitch.png" alt="Sandwich">
+                </div>
+                <div class="food-card-content">
+                    <h3>Grilled Sandwich</h3>
+                    <p class="food-description">Fresh vegetables with cheese</p>
+                    <div class="food-card-footer">
+                        <span class="food-price">$6</span>
+                        <button class="btn-add" onclick="event.stopPropagation(); window.location.href='sandwich.html'">
+                            <i class="fas fa-plus"></i> View
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="food-card" data-category="pizza" onclick="window.location.href='pizza.html'">
+                <div class="food-card-image">
+                    <img src="images/pizza margherita.png" alt="Pizza">
+                </div>
+                <div class="food-card-content">
+                    <h3>Pizza Margherita</h3>
+                    <p class="food-description">Fresh tomatoes, mozzarella, basil</p>
+                    <div class="food-card-footer">
+                        <span class="food-price">$12</span>
+                        <button class="btn-add" onclick="event.stopPropagation(); window.location.href='pizza.html'">
+                            <i class="fas fa-plus"></i> View
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="food-card" data-category="pasta" onclick="window.location.href='pasta.html'">
+                <div class="food-card-image">
+                    <img src="images/creamy pasta.png" alt="Pasta">
+                </div>
+                <div class="food-card-content">
+                    <h3>Creamy Pasta</h3>
+                    <p class="food-description">Rich creamy sauce with parmesan</p>
+                    <div class="food-card-footer">
+                        <span class="food-price">$10</span>
+                        <button class="btn-add" onclick="event.stopPropagation(); window.location.href='pasta.html'">
+                            <i class="fas fa-plus"></i> View
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="food-card" data-category="rice" onclick="window.location.href='biriyani.html'">
+                <div class="food-card-image">
+                    <img src="images/chicken biriyani.png" alt="Biriyani">
+                </div>
+                <div class="food-card-content">
+                    <h3>Chicken Biriyani</h3>
+                    <p class="food-description">Aromatic basmati rice with spices</p>
+                    <div class="food-card-footer">
+                        <span class="food-price">$12</span>
+                        <button class="btn-add" onclick="event.stopPropagation(); window.location.href='biriyani.html'">
+                            <i class="fas fa-plus"></i> View
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="food-card" data-category="salad" onclick="window.location.href='salad.html'">
+                <div class="food-card-image">
+                    <img src="images/fresh salad.png" alt="Salad">
+                </div>
+                <div class="food-card-content">
+                    <h3>Fresh Salad</h3>
+                    <p class="food-description">Mixed greens with vinaigrette</p>
+                    <div class="food-card-footer">
+                        <span class="food-price">$7</span>
+                        <button class="btn-add" onclick="event.stopPropagation(); window.location.href='salad.html'">
+                            <i class="fas fa-plus"></i> View
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="food-card" data-category="sushi" onclick="window.location.href='sushi.html'">
+                <div class="food-card-image">
+                    <img src="images/sushi platter.png" alt="Sushi">
+                </div>
+                <div class="food-card-content">
+                    <h3>Sushi Platter</h3>
+                    <p class="food-description">Fresh salmon and tuna selection</p>
+                    <div class="food-card-footer">
+                        <span class="food-price">$15</span>
+                        <button class="btn-add" onclick="event.stopPropagation(); window.location.href='sushi.html'">
+                            <i class="fas fa-plus"></i> View
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="food-card" data-category="steak" onclick="window.location.href='steak.html'">
+                <div class="food-card-image">
+                    <img src="images/grilled steak.png" alt="Steak">
+                </div>
+                <div class="food-card-content">
+                    <h3>Grilled Steak</h3>
+                    <p class="food-description">Premium beef with herbs</p>
+                    <div class="food-card-footer">
+                        <span class="food-price">$18</span>
+                        <button class="btn-add" onclick="event.stopPropagation(); window.location.href='steak.html'">
+                            <i class="fas fa-plus"></i> View
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="food-card" data-category="tacos" onclick="window.location.href='tacos.html'">
+                <div class="food-card-image">
+                    <img src="images/maxican tacos.png" alt="Tacos">
+                </div>
+                <div class="food-card-content">
+                    <h3>Mexican Tacos</h3>
+                    <p class="food-description">Authentic Mexican street tacos</p>
+                    <div class="food-card-footer">
+                        <span class="food-price">$9</span>
+                        <button class="btn-add" onclick="event.stopPropagation(); window.location.href='tacos.html'">
+                            <i class="fas fa-plus"></i> View
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="order" class="order-section">
+        <h2 class="section-title">Your Cart</h2>
+        <p class="section-subtitle">Review your order before checkout</p>
+        <div class="cart-container">
+            <div class="cart-items" id="orderList">
+                <div class="cart-empty">
+                    <i class="fas fa-shopping-basket"></i>
+                    <p>Your cart is empty</p>
+                    <span>Add some delicious items from our menu!</span>
+                </div>
+            </div>
+            <div class="cart-summary">
+                <h3>Order Summary</h3>
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span class="total-amount">$<span id="total">0</span></span>
+                </div>
+                <button class="btn btn-checkout" onclick="submitOrder()">
+                    <i class="fas fa-credit-card"></i> Checkout
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Wonderfull Cafe</h3>
+                <p>Experience fine dining like never before.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#order">Cart</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Food Street, City</p>
+                <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                <p><i class="fas fa-envelope"></i> info@wonderfullcafe.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Wonderfull Cafe | All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.querySelector('.nav-toggle').addEventListener('click', function () {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        document.querySelectorAll('.menu-tab').forEach(tab => {
+            tab.addEventListener('click', function () {
+                document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+
+                const category = this.getAttribute('data-category');
+                const cards = document.querySelectorAll('.menu-container .food-card');
+
+                cards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Update cart count display
+        function updateCartCount() {
+            const count = order.length;
+            document.getElementById('cartCount').textContent = count;
+        }
+
+        // Override renderOrder to update cart count
+        const originalRenderOrder = renderOrder;
+        renderOrder = function () {
+            originalRenderOrder();
+            updateCartCount();
+        };
+
+        // Initialize cart count on page load
+        updateCartCount();
+    </script>
+</body>
+
+</html>
