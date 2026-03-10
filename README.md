@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> c0e2176d9f508bb9cf7e09cc6950214fd80bb616
 # Restaurant Order Management System
 
 A full-stack web application for managing restaurant orders.
@@ -147,9 +151,12 @@ Open `CLIENT/index.html` using a local server such as **VS Code Live Server**.
 
 Serma Tudu
 Engineering Student
+<<<<<<< HEAD
 
 ---
 
 ## License
 
 This project is released under the MIT License.
+=======
+>>>>>>> c0e2176d9f508bb9cf7e09cc6950214fd80bb616
