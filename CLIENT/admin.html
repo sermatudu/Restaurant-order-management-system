@@ -380,11 +380,10 @@
                 displayOrders = displayOrders.reverse();
 
                 ordersList.innerHTML = displayOrders.map((order) => {
-                    const actualIndex = allOrders.findIndex(o => o.id === order.id);
-
+                    const orderId = order._id;
                     const orderTotal = order.total || 0;
                     const isCompleted = order.completed === true;
-                    const orderNumber = allOrders.length - actualIndex;
+                    const orderNumber = allOrders.length - allOrders.findIndex(o => o._id === order._id);
                     const orderDate = new Date(order.createdAt || Date.now());
                     const timeString = orderDate.toLocaleString();
 
@@ -402,7 +401,7 @@
                     const cardClass = isCompleted ? 'order-card completed' : 'order-card';
                     const doneButton = isCompleted
                         ? '<button class="mark-done-btn" disabled><i class="fas fa-check"></i> Done</button>'
-                        : `<button class="mark-done-btn" onclick="handleMarkDone(${actualIndex})"><i class="fas fa-check"></i> Mark as Done</button>`;
+                        : `<button class="mark-done-btn" onclick="handleMarkDone('${orderId}')"><i class="fas fa-check"></i> Mark as Done</button>`;
 
                     return `<div class="${cardClass}">
                         <div class="order-header">
@@ -412,7 +411,7 @@
                         ${order.tableNumber ? `<div class="order-table" style="color: #ff5a3c; font-weight: 600; margin-bottom: 10px;"><i class="fas fa-chair"></i> Table ${order.tableNumber}</div>` : ''}
                         <ul class="order-items">${itemsHtml}</ul>
                         <div class="order-total"><span>Total</span><span>$${orderTotal}</span></div>
-                        <div class="order-actions">${doneButton} <button class="delete-btn" onclick="handleDelete(${actualIndex})"><i class="fas fa-trash"></i> Delete</button></div>
+                        <div class="order-actions">${doneButton} <button class="delete-btn" onclick="handleDelete('${orderId}')"><i class="fas fa-trash"></i> Delete</button></div>
                     </div>`;
                 }).join('');
 

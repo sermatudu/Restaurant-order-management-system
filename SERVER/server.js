@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 
@@ -8,42 +9,88 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
-// 🔥 Serve frontend files
-app.use(express.static(path.join(__dirname, "../CLIENT")));
+// Connect to MongoDB
+mongoose.connect("mongodb://127.0.0.1:27017/restaurantDB")
+    .then(() => console.log("MongoDB connected"))
+    .catch(err => console.log(err));
 
-let orders = [];
-
-// API routes
-app.get("/orders", (req, res) => {
-    res.json(orders);
-});
-
-app.post("/orders", (req, res) => {
-    const newOrder = req.body;
-    newOrder.id = Date.now();
-    newOrder.completed = false;
-    newOrder.createdAt = new Date().toISOString();
-    orders.push(newOrder);
-    res.status(201).json({ message: "Order added successfully", orderId: newOrder.id });
-});
-
-app.put("/orders/:index", (req, res) => {
-    const index = parseInt(req.params.index);
-    if (index >= 0 && index < orders.length) {
-        orders[index] = { ...orders[index], ...req.body };
-        res.json({ message: "Order updated successfully" });
-    } else {
-        res.status(404).json({ message: "Order not found" });
+// Create Order Schema
+const OrderSchema = new mongoose.Schema({
+    tableNumber: Number,
+    items: [
+        {
+            name: String,
+            price: Number
+        }
+    ],
+    total: Number,
+    completed: {
+        type: Boolean,
+        default: false
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
 });
 
-app.delete("/orders/:index", (req, res) => {
-    const index = parseInt(req.params.index);
-    if (index >= 0 && index < orders.length) {
-        orders.splice(index, 1);
-        res.json({ message: "Order deleted successfully" });
-    } else {
-        res.status(404).json({ message: "Order not found" });
+const Order = mongoose.model("Order", OrderSchema);
+
+// Serve frontend files
+app.use(express.static(path.join(__dirname, "../CLIENT")));
+
+// API routes
+
+// Get all orders
+app.get("/orders", async (req, res) => {
+    try {
+        const orders = await Order.find().sort({ createdAt: -1 });
+        res.json(orders);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Create new order
+app.post("/orders", async (req, res) => {
+    try {
+        const newOrder = new Order(req.body);
+        await newOrder.save();
+        res.status(201).json({ message: "Order added successfully", orderId: newOrder._id });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Update order (mark as done)
+app.put("/orders/:id", async (req, res) => {
+    try {
+        const order = await Order.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true }
+        );
+        if (order) {
+            res.json({ message: "Order updated successfully" });
+        } else {
+            res.status(404).json({ message: "Order not found" });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Delete order
+app.delete("/orders/:id", async (req, res) => {
+    try {
+        const order = await Order.findByIdAndDelete(req.params.id);
+        if (order) {
+            res.json({ message: "Order deleted successfully" });
+        } else {
+            res.status(404).json({ message: "Order not found" });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 });
 
@@ -51,3 +98,4 @@ app.delete("/orders/:index", (req, res) => {
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
+
