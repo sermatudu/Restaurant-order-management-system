@@ -95,6 +95,23 @@
         }
 
         function addBurgerToOrder() {
+            // Check if already adding to prevent duplicate clicks
+            if (isAddingOrder) return;
+
+            // Check if table number is selected
+            const table = localStorage.getItem("tableNumber");
+            if (!table) {
+                alert("Please enter your table number first");
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
+
+            // Disable button to prevent duplicate orders
+            isAddingOrder = true;
+            const btn = document.querySelector('.add-to-order');
+            btn.disabled = true;
+            btn.textContent = 'Adding...';
+
             let total = basePrice;
             let itemName = 'Classic Burger';
             let customizations = [];
@@ -123,6 +140,11 @@
             }
 
             alert('Burger added to order!');
+
+            // Re-enable button
+            isAddingOrder = false;
+            btn.disabled = false;
+            btn.textContent = 'Add to Order';
         }
     </script>
 </body>

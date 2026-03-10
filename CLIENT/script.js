@@ -1,6 +1,7 @@
 // Load order from localStorage on page load
 let order = JSON.parse(localStorage.getItem('restaurantOrder')) || [];
 let total = parseFloat(localStorage.getItem('restaurantTotal')) || 0;
+let isAddingOrder = false; // Flag to prevent duplicate order clicks
 
 // Save to localStorage
 function saveOrder() {
@@ -94,7 +95,7 @@ function renderOrder() {
         
         const itemPrice = document.createElement("span");
         itemPrice.className = "order-item-price";
-        itemPrice.textContent = `$${item.price}`;
+        itemPrice.textContent = "$" + item.price;
         
         itemInfo.appendChild(itemName);
         itemInfo.appendChild(itemPrice);
@@ -130,10 +131,26 @@ function getServerUrl() {
     return "http://localhost:5000";
 }
 
+// Global flag to prevent duplicate order submissions
+let isSubmitting = false;
+
 async function submitOrder() {
     if (order.length === 0) {
         alert("Your cart is empty! Please add items first.");
         return;
+    }
+
+    // Prevent duplicate submissions
+    if (isSubmitting) {
+        return;
+    }
+    isSubmitting = true;
+
+    // Disable checkout button visually
+    const checkoutBtn = document.querySelector('.btn-checkout');
+    if (checkoutBtn) {
+        checkoutBtn.disabled = true;
+        checkoutBtn.textContent = 'Processing...';
     }
 
     const table = localStorage.getItem("tableNumber");
@@ -170,6 +187,13 @@ async function submitOrder() {
     } catch (error) {
         console.error("Order submission error:", error);
         alert("Unable to connect to server. Please make sure you're connected to the same network as the server.");
+    } finally {
+        // Re-enable the button
+        isSubmitting = false;
+        if (checkoutBtn) {
+            checkoutBtn.disabled = false;
+            checkoutBtn.innerHTML = '<i class="fas fa-credit-card"></i> Checkout';
+        }
     }
 }
 
@@ -208,4 +232,5 @@ document.addEventListener('visibilitychange', function() {
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', function() {
     initCart();
+    displaySavedTable();
 });

@@ -823,6 +823,11 @@ footer {
   background: var(--gold-hover);
 }
 
+.add-to-order:disabled {
+  background: #888;
+  cursor: not-allowed;
+}
+
 /* RESPONSIVE */
 @media (max-width: 992px) {
   .hero-content h1 {
