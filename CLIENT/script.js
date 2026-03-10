@@ -8,7 +8,48 @@ function saveOrder() {
     localStorage.setItem('restaurantTotal', total.toString());
 }
 
+// Save table number to localStorage
+function saveTable() {
+    const tableInput = document.getElementById("tableNumber");
+    const table = tableInput.value;
+    const displayElement = document.getElementById("selectedTableDisplay");
+
+    if (!table) {
+        alert("Please enter your table number");
+        return;
+    }
+
+    localStorage.setItem("tableNumber", table);
+    
+    if (displayElement) {
+        displayElement.textContent = "Table " + table + " selected";
+    }
+    alert("Table " + table + " selected");
+}
+
+// Display saved table on page load
+function displaySavedTable() {
+    const savedTable = localStorage.getItem("tableNumber");
+    const displayElement = document.getElementById("selectedTableDisplay");
+    const tableInput = document.getElementById("tableNumber");
+    
+    if (savedTable && displayElement) {
+        displayElement.textContent = "Table " + savedTable + " selected";
+    }
+    if (savedTable && tableInput) {
+        tableInput.value = savedTable;
+    }
+}
+
 function addToOrder(name, price) {
+    const table = localStorage.getItem("tableNumber");
+    
+    if (!table) {
+        alert("Please enter your table number first");
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+    }
+    
     order.push({ name, price });
     total += price;
     saveOrder();
@@ -95,6 +136,8 @@ async function submitOrder() {
         return;
     }
 
+    const table = localStorage.getItem("tableNumber");
+
     try {
         const serverUrl = getServerUrl();
         const response = await fetch(serverUrl + "/orders", {
@@ -102,7 +145,11 @@ async function submitOrder() {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ items: order, total })
+            body: JSON.stringify({ 
+                tableNumber: table,
+                items: order, 
+                total 
+            })
         });
 
         if (response.ok) {

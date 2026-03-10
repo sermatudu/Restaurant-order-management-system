@@ -409,6 +409,7 @@
                             <span class="order-id">Order #${orderNumber}</span>
                             <div>${statusBadge} <span class="order-time">${timeString}</span></div>
                         </div>
+                        ${order.tableNumber ? `<div class="order-table" style="color: #ff5a3c; font-weight: 600; margin-bottom: 10px;"><i class="fas fa-chair"></i> Table ${order.tableNumber}</div>` : ''}
                         <ul class="order-items">${itemsHtml}</ul>
                         <div class="order-total"><span>Total</span><span>$${orderTotal}</span></div>
                         <div class="order-actions">${doneButton} <button class="delete-btn" onclick="handleDelete(${actualIndex})"><i class="fas fa-trash"></i> Delete</button></div>

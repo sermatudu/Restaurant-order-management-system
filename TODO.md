@@ -1,14 +1,18 @@
-# Restaurant UI Improvements TODO
+# Table Selection Feature Implementation
 
-## Plan Summary
-Improve the restaurant website UI with modern design elements following the recommended structure.
+## Task: Add table input on welcome page and block ordering if table not selected
 
-## Tasks
-- [x] 1. Update CLIENT/index.html - Add Navbar, Popular Items Section, improve structure
-- [x] 2. Update CLIENT/style.css - Complete UI overhaul with new color palette, card styles, navbar, responsive design
-- [x] 3. Update CLIENT/script.js - Enhanced cart functionality (integrated in index.html)
+### Steps:
+- [x] 1. Add table-select HTML to index.html (hero section)
+- [x] 2. Add CSS styling for table-select in style.css
+- [x] 3. Update script.js:
+  - [x] Add saveTable() function
+  - [x] Update addToOrder() to check for table number
+  - [x] Update submitOrder() to include tableNumber
+  - [x] Add display for selected table
+- [x] 4. Update admin.html to show table number in orders
+- [x] 5. Server already stores all JSON data sent via POST (no changes needed)
 
-## Implementation Completed
-1. index.html - Added navbar with Logo, Home, Menu, About, Cart links + Popular Items Section
-2. style.css - Applied new styling with #ff5a3c primary color, modern card UI, responsive design
-3. Added Font Awesome icons, menu tab filtering, cart count display
+### Status: Completed
+
+

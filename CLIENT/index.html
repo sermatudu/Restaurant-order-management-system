@@ -43,6 +43,13 @@
         </div>
     </section>
 
+    <div class="table-select">
+        <h3>Enter Your Table Number</h3>
+        <input type="number" id="tableNumber" placeholder="Table No." min="1">
+        <button onclick="saveTable()">Continue</button>
+        <p id="selectedTableDisplay" class="selected-table"></p>
+    </div>
+
     <section class="popular-section">
         <h2 class="section-title">Popular Items</h2>
         <p class="section-subtitle">Our most loved dishes by customers</p>
@@ -388,6 +395,9 @@
 
         // Initialize cart count on page load
         updateCartCount();
+
+        // Display saved table number
+        displaySavedTable();
     </script>
 </body>
 

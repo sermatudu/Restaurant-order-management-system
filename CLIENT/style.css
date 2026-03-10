@@ -608,6 +608,73 @@ footer {
   color: var(--muted-text);
 }
 
+.selected-table {
+  color: #c9a24a;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+/* TABLE SELECT */
+.table-select {
+  text-align: center;
+  margin: 40px auto;
+  padding: 30px;
+  max-width: 500px;
+  background: var(--secondary-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+}
+
+.table-select h3 {
+  font-size: 24px;
+  color: var(--text-white);
+  margin-bottom: 20px;
+}
+
+.table-select input {
+  padding: 12px;
+  font-size: 16px;
+  width: 200px;
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  background: var(--primary-bg);
+  color: var(--text-white);
+  margin-right: 10px;
+}
+
+.table-select input:focus {
+  outline: none;
+  border-color: var(--gold-accent);
+}
+
+/* Remove spinner from number input */
+.table-select input[type="number"]::-webkit-inner-spin-button,
+.table-select input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.table-select input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.table-select button {
+  padding: 12px 25px;
+  background: #c9a24a;
+  color: #111;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.table-select button:hover {
+  background: #e5c97a;
+}
+
 /* DETAIL PAGE */
 .detail-nav {
   background: var(--primary-bg);
